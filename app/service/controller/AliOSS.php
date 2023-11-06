@@ -2,7 +2,6 @@
 declare (strict_types = 1);
 
 namespace app\service\controller;
-use app\BaseController;
 use app\Request;
 use OSS\Core\OssException;
 use OSS\OssClient;
