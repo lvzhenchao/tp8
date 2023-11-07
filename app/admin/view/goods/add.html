@@ -1,0 +1,121 @@
+<link rel="stylesheet" type="text/css" href="/static/lib/webuploader/webuploader.css">   
+<script type="text/javascript" src="/static/lib/webuploader/webuploader.min.js"></script>
+<section class="rt_wrap content mCustomScrollbar">
+ <div class="rt_content">
+      <div class="page_title">
+       <h2 class="fl">商品详情示例</h2>
+       <a href="/goods" class="fr top_rt_btn">返回产品列表</a>
+      </div>
+	<form action="/goods" method="post">
+     <section>
+      <ul class="ulColumn2">
+       <li>
+        <span class="item_name" style="width:120px;">商品名称：</span>
+        <input type="text" name="goods_title" class="textbox textbox_295" placeholder="商品名称..."/>
+       </li>
+       <li>
+        <span class="item_name" style="width:120px;">商品原价：</span>
+        <input type="text" class="textbox" name="goods_price" />
+       </li>
+       <li>                                                               
+        <span class="item_name" style="width:120px;">商品促销价：</span>
+	 <input type="text" class="textbox" name="goods_prom_price" />
+	 </li>                                                              
+       <li>
+	<li>
+	 <span class="item_name" style="width:120px;">商品摘要：</span>
+	 <textarea name="goods_sum" class="textarea" style="width:400px"></textarea>  
+	  </li>                                                           
+	<li>                                                            
+		 <span class="item_name" style="width:120px;">上传商品：</span> 
+	 	<label id="goods_img">选择文件</label>                            
+ 		<input type="hidden" class="goods_img"  name="goods_img" value="">     
+ 		<img id="goods_img_src" style="width:200px;height:100px"  src="" />      
+ 	</li>                                                            
+	<li>                                                                    
+         <span class="item_name" style="width:120px;">上传商品描述：</span> 
+        <label id="goods_des">选择文件</label>                             
+        <input type="hidden" class="goods_des" name="goods_desc" value="">      
+        <img id="goods_des_src" style="width:200px;height:100px"  src="" />       
+</li>                                                                   
+
+       <li>
+        <span class="item_name" style="width:120px;"></span>
+        <input type="submit" class="link_btn"/>
+       </li>
+      </ul>
+     </section>
+	</form>
+ </div>
+</section>
+<script>                                                                 
+// 初始化Web Uploader                                                    
+var uploader = WebUploader.create({                                      
+                                                                         
+    // 选完文件后，是否自动上传。                                        
+    auto: true,                                                          
+                                                                         
+    // swf文件路径                                                       
+    swf: "/static/lib/webuploader/Uploader.swf",                         
+                                                                         
+    // 文件接收服务端。                                                  
+    server: "/upImg",                                                       
+                                                                         
+    // 选择文件的按钮。可选。                                            
+    // 内部根据当前运行是创建，可能是input元素，也可能是flash.           
+    pick: '#goods_img',                                                     
+                                                                         
+    // 只允许选择图片文件。                                              
+    accept: {                                                            
+        title: 'Images',                                                 
+        extensions: 'gif,jpg,jpeg,bmp,png',                              
+        mimeTypes: 'image/*'                                             
+    }                                                                    
+});                                                                      
+
+// 文件上传成功，给item添加成功class, 用样式标记上传成功。data为后台上传返回的参数    
+uploader.on( 'uploadSuccess', function( file ,data) {                                 
+	$('.goods_img').val(data.img_url);
+	$('#goods_img_src').attr('src',data.img_url);
+});                                                                                   
+                                                                                      
+//一般进不来，不用处理                                                                
+uploader.on( 'uploadError', function( file,data ) {                                   
+                                                                                      
+});                                                                                   
+
+// 初始化Web Uploader                                               
+var upload = WebUploader.create({                                 
+                                                                    
+    // 选完文件后，是否自动上传。                                   
+    auto: true,                                                     
+                                                                    
+    // swf文件路径                                                  
+    swf: "/static/lib/webuploader/Uploader.swf",                    
+                                                                    
+    // 文件接收服务端。                                             
+    server: "/upImg",                                                  
+                                                                    
+    // 选择文件的按钮。可选。                                       
+    // 内部根据当前运行是创建，可能是input元素，也可能是flash.      
+    pick: '#goods_des',                                             
+                                                                    
+    // 只允许选择图片文件。                                         
+    accept: {                                                       
+        title: 'Images',                                            
+        extensions: 'gif,jpg,jpeg,bmp,png',                         
+        mimeTypes: 'image/*'                                        
+    }                                                               
+});                                                                 
+// 文件上传成功，给item添加成功class, 用样式标记上传成功。data为后台上传返回的参数   
+upload.on( 'uploadSuccess', function( file ,data) {                                
+	$('.goods_des').val(data.img_url);            
+	$('#goods_des_src').attr('src',data.img_url);
+});                                                                                  
+                                                                                     
+//一般进不来，不用处理                                                               
+upload.on( 'uploadError', function( file,data ) {                                  
+                                                                                     
+});                                                                                  
+
+</script>

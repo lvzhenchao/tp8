@@ -16,6 +16,7 @@ class Index extends Common
 
     public function index()
     {
+        return View::fetch();
         halt("后台首页");
     }
 

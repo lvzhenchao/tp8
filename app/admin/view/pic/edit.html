@@ -1,0 +1,77 @@
+        <link rel="stylesheet" type="text/css" href="/static/lib/webuploader/webuploader.css">
+	<script type="text/javascript" src="/static/lib/webuploader/webuploader.min.js"></script>
+
+<section class="rt_wrap content mCustomScrollbar">
+ <div class="rt_content">
+      <div class="page_title">
+       <h2 class="fl">图片列表</h2>
+       <a href="/pic" class="fr top_rt_btn">返回图片列表</a>
+      </div>
+     <section>
+	     <form action="/pic/{$pic.id}" method="POST">
+		     <input type="hidden" name="_method" value="put">
+      <ul class="ulColumn2">
+       <li>
+        <span class="item_name" style="width:120px;">图片名称：</span>
+	<input type="text" name="img_title" value="{$pic.img_title}" class="textbox textbox_295" placeholder="图片名称..."/>
+       </li>
+       <li>
+        <span class="item_name" style="width:120px;">图片顺序：</span>
+	<input type="text" name="img_order" value="{$pic.img_order}" class="textbox" placeholder="图片顺序..."/>
+       </li>
+       <li>
+        <span class="item_name" style="width:120px;">是否展示：</span>
+	<label class="single_selection"><input type="radio" {$pic.is_show==1?'checked':''} value="1" name="is_show"/>是</label>
+	<label class="single_selection"><input type="radio" {$pic.is_show==0?'checked':''} value="0" name="is_show"/>否</label>
+       </li>
+       <li>
+        <span class="item_name" style="width:120px;">上传图片：</span>
+        <label id="picker">选择文件</label>
+	<input type="hidden" id="img_url" name="img_url" value="{$pic.img_url}">
+	<img id="img" style="width:200px;height:100px"  src="{$pic.img_url}" />
+       </li>
+	<li>
+        <span class="item_name" style="width:120px;"></span>
+        <input type="submit" class="link_btn" value="提交" />
+       </li>
+      </ul>
+     </section>
+     </form>
+ </div>
+</section>
+<script>
+// 初始化Web Uploader
+var uploader = WebUploader.create({
+
+    // 选完文件后，是否自动上传。
+    auto: true,
+
+    // swf文件路径
+    swf: "/static/lib/webuploader/Uploader.swf",
+
+    // 文件接收服务端。
+    server: "/up",
+
+    // 选择文件的按钮。可选。
+    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+    pick: '#picker',
+
+    // 只允许选择图片文件。
+    accept: {
+        title: 'Images',
+        extensions: 'gif,jpg,jpeg,bmp,png',
+        mimeTypes: 'image/*'
+    }
+});
+
+// 文件上传成功，给item添加成功class, 用样式标记上传成功。data为后台上传返回的参数
+uploader.on( 'uploadSuccess', function( file ,data) {
+	$('#img').attr('src',data.img_url);
+	$('#img_url').val(data.img_url);
+});
+
+//一般进不来，不用处理
+uploader.on( 'uploadError', function( file,data ) {
+    
+});
+</script>

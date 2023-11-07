@@ -1,0 +1,42 @@
+
+<section class="rt_wrap content mCustomScrollbar">
+ <div class="rt_content">
+      <div class="page_title">
+       <h2 class="fl">会员列表</h2>
+       <a href="user_detail.html" class="fr top_rt_btn add_icon">添加新会员</a>
+      </div>
+      <section class="mtb">
+       <select class="select">
+        <option>会员等级</option>
+        <option>普通会员</option>
+        <option>高级会员</option>
+       </select>
+       <input type="text" class="textbox textbox_225" placeholder="输入会员号/手机/电子邮件查询..."/>
+       <input type="button" value="查询" class="group_btn"/>
+      </section>
+      <table class="table">
+       <tr>
+        <th>Id</th>
+        <th>会员头像</th>
+        <th>会员昵称</th>
+        <th>open-id</th>
+        <th>操作</th>
+       </tr>
+       {foreach name="users" id="vo"}
+       <tr>
+	       <td class="center">{$vo.id}</td>
+	       <td class="center"><img src="{$vo.avatar_url}" width="50" height="50"/></td>
+	       <td>{$vo.nick_name}</td>
+	       <td class="center">{$vo.open_id}</td>
+        <td class="center">
+         <a href="user_detail.html" title="编辑" class="link_icon">&#101;</a>
+         <a href="#" title="删除" class="link_icon">&#100;</a>
+        </td>
+       </tr>
+       {/foreach}
+      </table>
+      <aside class="paging">
+	      {$users->render()}
+      </aside>
+ </div>
+</section>
