@@ -29,6 +29,7 @@ class Upload {
             $res = $oss->upload($object, $filePath);
         }
 
+        dump($res);
         if (isset($res['info']['url'])) {
             $return['absolute_url']  = $res['info']['url'];
             $return['relative_path'] = $object;
